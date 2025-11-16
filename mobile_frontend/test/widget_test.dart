@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mobile_frontend/app.dart';
+import 'package:mobile_frontend/main.dart';
 
 void main() {
-  testWidgets('App builds and shows placeholder text', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MobileFrontendApp());
+  testWidgets('App generation message displayed', (WidgetTester tester) async {
+    await tester.pumpWidget(const MyApp());
 
-    // Verify placeholder text is present.
-    expect(find.text('Flutter app is set up successfully.'), findsOneWidget);
+    expect(find.text('mobile_frontend App is being generated...'), findsOneWidget);
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+  });
 
-    // Basic sanity check: there is a Scaffold in the tree.
-    expect(find.byType(Scaffold), findsOneWidget);
+  testWidgets('App bar has correct title', (WidgetTester tester) async {
+    await tester.pumpWidget(const MyApp());
+
+    expect(find.text('mobile_frontend'), findsOneWidget);
   });
 }
