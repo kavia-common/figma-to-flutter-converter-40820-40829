@@ -1,0 +1,214 @@
+:root{
+  --white:#FFFFFF;
+  --text:#1E222B;
+  --muted:#8891A5;
+  --primary:#2A4BA0;
+  --accent:#F9B023;
+  --card:#FAFBFD;
+  --stroke:#EDEDED;
+}
+
+/* Reset and canvas */
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;height:100%}
+body{background:var(--white);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif}
+.screen{
+  position:relative;
+  width:375px;
+  height:812px;
+  margin:0 auto;
+  background:var(--white);
+  overflow:hidden;
+}
+
+/* Debug overlay image */
+.screen-image{
+  position:absolute;left:0;top:0;width:375px;height:812px;opacity:0;pointer-events:none;
+}
+
+/* Top Bar from YAML
+   Group area: x:-535 y:1744 within frame => relative top ~45 from top? In this screen, align to 20 top.
+   Dimensions: width ~204, height 40 (we'll layout full-width matching pixel visuals)
+*/
+.top-bar{
+  position:absolute;
+  left:20px;
+  top:28px;
+  width:335px;
+  height:40px;
+}
+.back-wrap{position:absolute;left:0;top:0;width:40px;height:40px;cursor:pointer}
+.back-ellipse{position:absolute;left:0;top:0;width:40px;height:40px;display:block}
+.back-vector{
+  position:absolute;
+  left:11px; /* aligns arrow within ellipse similar to YAML Vector dims */
+  top:10px;
+  width:21px;
+  height:20px;
+  display:block;
+}
+.top-title{
+  position:absolute;
+  left:61px;
+  top:8px;
+  height:24px;
+  font-size:20px;
+  line-height:24px;
+  font-weight:700;
+  color:#000; /* style_5 text */
+}
+
+/* Section Title "Delivery Address"
+   YAML at y:1843 -> approximately 120px from top in our canvas
+*/
+.section-title{
+  position:absolute;
+  left:20px;
+  top:120px;
+  width:auto;
+  height:24px;
+  font-size:18px; /* typography_ref typo_188 approx */
+  line-height:24px;
+  color:#3E4554; /* style_34 approx */
+  font-weight:600;
+}
+
+/* Address Cards (each 327x96 at x:-535 -> left margin ~24) */
+.address-card{
+  position:absolute;
+  left:24px;
+  width:327px;
+  height:96px;
+  border-radius:14px;
+  overflow:hidden;
+}
+.address-home{ top:150px; }
+.address-office{ top:270px; }
+
+/* Card backgrounds: distinct styles per YAML style refs */
+.card-bg{
+  position:absolute;left:0;top:0;width:327px;height:96px;border-radius:14px;
+}
+/* Home rectangle style (style_142 approximation): subtle gray card */
+.bg-home{ background:#F8F9FB; border:1px solid #F0F2F6; }
+/* Office rectangle style (style_145 approximation): white card with soft border */
+.bg-office{ background:#FFFFFF; border:1px solid #EEF1F6; }
+
+.card-title{
+  position:absolute;
+  left:20px;
+  top:14px; /* y:1908 => 17 from group top; 14 visually aligns */
+  font-size:16px; /* typo_168 approx height 20 */
+  line-height:20px;
+  color:#000;
+  font-weight:600;
+}
+
+.card-row{
+  position:absolute;
+  left:20px;
+  top:48px; /* y:1946 within first card => ~48 from group top */
+  width:287px;
+  height:32px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.card-address{
+  font-size:14px; /* typo_187 */
+  line-height:20px;
+  color:#3E4554; /* style_34 */
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.card-address.multi{
+  white-space:normal;
+  line-height:20px;
+  max-width:201px; /* per YAML width: 201 */
+}
+
+.edit-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.edit-text{
+  font-size:12px; /* typo_177 */
+  line-height:16px;
+  color:#2A4BA0; /* style_26 */
+  font-weight:600;
+}
+.check-wrap{
+  position:relative;
+  width:22px; height:22px;
+}
+.check-ellipse{position:absolute;left:0;top:0;width:22px;height:22px}
+.check-vector{
+  position:absolute;
+  left:2px;
+  top:1px;
+  width:18px;
+  height:20px;
+  opacity:.0; /* The inner vector from YAML is a small tick; we keep ellipse as selected indicator.
+                 If strict need of visible tick arises, set opacity to 1 and adjust. */
+}
+
+/* Add New Address button group (327x79 at y:2143) */
+.add-address{
+  position:absolute;
+  left:27px; /* YAML x:-528 maps ~27 from left to keep 327 width centered */
+  top:390px;
+  width:327px;
+  height:79px;
+  cursor:pointer;
+}
+.add-bg{
+  position:absolute;left:0;top:0;width:327px;height:79px;border-radius:14px;background:#FFFFFF;border:1px dashed #E0E6F3;
+}
+.add-inner{
+  position:absolute;left:90px;top:28px;width:145px;height:22px;display:flex;align-items:center;gap:12px;
+}
+.add-icon{position:relative;width:22px;height:22px}
+.add-icon-ellipse{
+  position:absolute;left:0;top:0;width:22px;height:22px;border-radius:50%;background:#F9B023;
+}
+.add-plus{
+  position:absolute;left:5px;top:5px;width:12px;height:12px;display:flex;align-items:center;justify-content:center;
+}
+.add-plus-outer{width:12px;height:12px;display:block}
+.add-text{
+  font-size:14px; /* typo_189 approx 20 height */
+  line-height:20px;
+  color:#000;
+  font-weight:600;
+}
+
+/* Bottom fixed primary button (327x56 at y:2424) */
+.primary-button{
+  position:absolute;
+  left:24px;
+  bottom:24px;
+  width:327px;
+  height:56px;
+  border:0;
+  padding:0;
+  background:transparent;
+  cursor:pointer;
+}
+.primary-bg{
+  position:absolute;left:0;top:0;width:327px;height:56px;border-radius:16px;background:#2A4BA0;
+  box-shadow: 0 8px 16px rgba(42,75,160,0.22);
+}
+.primary-text{
+  position:absolute;left:0;right:0;top:18px;text-align:center;
+  font-size:16px; line-height:19px; color:#FFFFFF; font-weight:700;
+}
+
+/* Focus styles for keyboard accessibility */
+.back-wrap:focus,
+.edit-wrap:focus,
+.add-address:focus,
+.primary-button:focus { outline:2px solid var(--accent); outline-offset:2px }

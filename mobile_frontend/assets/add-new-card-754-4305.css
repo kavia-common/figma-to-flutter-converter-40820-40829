@@ -1,0 +1,183 @@
+:root{
+  --white:#FFFFFF;
+  --text:#1E222B;
+  --muted:#8891A5;
+  --primary:#2A4BA0;
+  --accent:#F9B023;
+  --card:#FAFBFD;
+  --stroke:#EDEDED;
+  --label:#3E4554;
+  --line:#EDEDED;
+}
+
+/* Reset and canvas */
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;height:100%}
+body{background:var(--white);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif}
+.screen{
+  position:relative;
+  width:375px;
+  height:812px;
+  margin:0 auto;
+  background:var(--white);
+  overflow:hidden;
+}
+
+/* Debug overlay image */
+.screen-image{
+  position:absolute;left:0;top:0;width:375px;height:812px;opacity:0;pointer-events:none;
+}
+
+/* Top Bar */
+.top-bar{
+  position:absolute;
+  left:20px;
+  top:28px;
+  width:335px;
+  height:40px;
+}
+.back-wrap{
+  position:absolute;left:0;top:0;width:40px;height:40px;cursor:pointer;border:0;background:transparent;padding:0;
+}
+.back-ellipse{position:absolute;left:0;top:0;width:40px;height:40px;display:block}
+.back-vector{
+  position:absolute;
+  left:9px;
+  top:9px;
+  width:21px;
+  height:21px;
+  display:block;
+}
+.top-title{
+  position:absolute;
+  left:61px;
+  top:8px;
+  height:24px;
+  font-size:20px;
+  line-height:24px;
+  font-weight:700;
+  color:#000;
+}
+
+/* Form groups container (Text, line) */
+.form-groups{
+  position:absolute;
+  left:20px;
+  top:135px; /* Map YAML y:1847 -> within our canvas around 135 for visual balance */
+  width:335px;
+  height:auto;
+}
+
+/* Common group styles */
+.group{
+  position:relative;
+  width:335px;
+  height:60px;
+  margin-bottom:31px; /* spacing to match y offsets */
+}
+.group .label{
+  position:absolute;
+  left:0;
+  top:0;
+  font-size:12px;           /* typo_190 approximated */
+  line-height:16px;
+  color:var(--label);
+}
+.group .value{
+  position:absolute;
+  left:0;
+  top:25px;
+  font-size:16px;           /* typo_136 approximated */
+  line-height:24px;
+  color:#000;
+  font-weight:600;
+}
+.group .line{
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:335px;
+  height:1px;
+  background:var(--line);
+}
+
+/* Specific groups order to respect YAML layout visually */
+.group-93{ /* Card holder name */ }
+.group-94{ /* Card Number */ }
+
+/* Half-width groups row (Exp Date, CVc) */
+.group-half{
+  position:relative;
+  width:150px;
+  height:60px;
+  display:inline-block;
+}
+.group-95{ /* Exp Date */ margin-right:35px; }
+.group-96{ /* CVc */ }
+
+/* Align the half groups in one line */
+.group-95, .group-96{ vertical-align:top; }
+.group-half .label{
+  position:absolute; left:0; top:0;
+  font-size:12px; line-height:16px; color:var(--label);
+}
+.group-half .value{
+  position:absolute; left:0; top:25px;
+  font-size:16px; line-height:24px; color:#000; font-weight:600;
+}
+.group-half .line{
+  position:absolute; left:0; bottom:0; width:150px; height:1px; background:var(--line);
+}
+
+/* Summary Card (Rectangle 1318) */
+.summary-card{
+  position:absolute;
+  left:8px;  /* YAML width 359 and our canvas 375 -> center with 8px margins */
+  right:8px;
+  top:420px; /* map from y:2280 relative -> balanced placement under form groups */
+  height:auto;
+  padding:16px 20px 20px 20px;
+  background:#F8F9FB;
+  border:1px solid #EEF1F6;
+  border-radius:16px;
+}
+.summary-card .row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:24px;
+  margin:6px 0;
+}
+.summary-card .row .name{
+  font-size:14px; line-height:20px; color:#3E4554; font-weight:600;
+}
+.summary-card .row .price{
+  font-size:14px; line-height:20px; color:#000; font-weight:700;
+}
+.summary-card .row.total .name{ font-weight:700; }
+.summary-card .row.total .price{ font-weight:800; }
+
+/* Bottom primary button (Button) */
+.primary-button{
+  position:absolute;
+  left:24px;
+  bottom:24px;
+  width:327px;
+  height:56px;
+  border:0;
+  padding:0;
+  background:transparent;
+  cursor:pointer;
+}
+.primary-bg{
+  position:absolute;left:0;top:0;width:327px;height:56px;border-radius:16px;background:var(--primary);
+  box-shadow: 0 8px 16px rgba(42,75,160,0.22);
+}
+.primary-text{
+  position:absolute;left:0;right:0;top:18px;text-align:center;
+  font-size:16px; line-height:19px; color:#FFFFFF; font-weight:700;
+}
+
+/* Focus styles for keyboard accessibility */
+.back-wrap:focus,
+.primary-button:focus { outline:2px solid var(--accent); outline-offset:2px }

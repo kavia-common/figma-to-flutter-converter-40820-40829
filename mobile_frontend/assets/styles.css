@@ -1,0 +1,145 @@
+:root{
+  --bg-canvas:#FFC83A;
+  --bg-white:#FFFFFF;
+  --text-primary:#1A1A1A;
+  --text-secondary:#5B5B5B;
+  --text-inverse:#FFFFFF;
+  --nav-blue:#234BCE;
+  --nav-blue-weak:#2E57D8;
+  --accent-green:#27AE60;
+  --accent-orange:#FF7A00;
+  --accent-red:#EB5757;
+  --chip-gray:#F2F2F2;
+  --card-bg:#FFFFFF;
+  --card-elev:rgba(0,0,0,0.08);
+  --shadow-strong:rgba(0,0,0,0.16);
+  --divider:rgba(0,0,0,0.08);
+  --figma-brand:#F24E1E;
+
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-5:20px;
+  --space-6:24px;
+  --space-7:32px;
+  --space-8:40px;
+  --space-9:48px;
+  --space-10:64px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Helvetica Neue",Arial,sans-serif;
+  color:var(--text-primary);
+  background:var(--bg-canvas);
+}
+
+.landing{
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--space-10) var(--space-9);
+  display:grid;
+  grid-template-columns: 1fr 1.6fr;
+  column-gap: var(--space-9);
+  row-gap: var(--space-8);
+  align-items:start;
+}
+
+.hero__header{margin-bottom:var(--space-8)}
+.hero__title{
+  font-size:64px; line-height:1.1; font-weight:700; margin:0 0 var(--space-4) 0;
+}
+.hero__subtitle{
+  font-size:32px; line-height:1.25; font-weight:600; margin:0;
+}
+
+.hero__features{
+  list-style:none; padding:0; margin: var(--space-8) 0; display:flex; flex-direction:column; gap:var(--space-6);
+}
+.chip{
+  display:inline-flex; align-items:center;
+  min-height:95px;
+  padding: 20px 24px;
+  background: var(--chip-gray);
+  border-radius:16px;
+  font-size:20px; font-weight:600;
+  box-shadow: 0 6px 24px var(--card-elev);
+}
+
+.hero__footer{
+  display:flex; align-items:center; gap:var(--space-7); margin-top: var(--space-8);
+}
+.badge{
+  width:182px; height:182px; border-radius:50%;
+  background: var(--bg-white);
+  box-shadow: 0 12px 30px var(--card-elev);
+  display:grid; place-items:center;
+}
+.badge__figma{
+  width:118px; height:118px; position:relative; display:grid; place-items:center;
+}
+.figma__vector{width:60%; height:auto; display:block}
+
+.screens-card{
+  width:467px; height:135px; background:var(--bg-white);
+  border-radius:18px; box-shadow:0 12px 30px var(--card-elev);
+  display:flex; align-items:center; padding:0 24px;
+}
+.screens-card__label{font-size:24px; font-weight:700}
+
+.gallery{
+  position:relative;
+  min-height: 900px;
+  display:grid;
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
+  gap: var(--space-8);
+}
+
+.phone{
+  margin:0; padding:0; align-self:start; justify-self:center;
+  filter: drop-shadow(0 12px 32px var(--shadow-strong));
+  transform-origin: center;
+}
+.phone img{
+  display:block; width:100%; height:auto; border-radius:24px; background:#fff;
+}
+
+/* Approximate diagonal arrangement & variety of sizes */
+.phone--orders{grid-column:1; width: 360px; transform: translateY(-40px) rotate(-6deg);}
+.phone--home{grid-column:2; width: 360px; transform: translateY(-140px) rotate(5deg);}
+.phone--details{grid-column:3; width: 360px; transform: translateY(-10px) rotate(-4deg);}
+.phone--cart{grid-column:2; width: 360px; transform: translateY(120px) rotate(4deg);}
+.phone--track{grid-column:3; width: 360px; transform: translateY(-180px) rotate(6deg);}
+.phone--categories{grid-column:1; width: 360px; transform: translateY(100px) rotate(3deg);}
+
+/* Responsive */
+@media (max-width: 1199px){
+  .landing{grid-template-columns:1fr; padding: var(--space-9)}
+  .hero__title{font-size:48px}
+  .hero__subtitle{font-size:24px}
+  .screens-card{width:100%}
+  .gallery{
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    min-height: auto;
+  }
+  .phone--orders,.phone--home,.phone--details,.phone--cart,.phone--track,.phone--categories{
+    width:100%; transform: none;
+  }
+}
+
+@media (max-width: 767px){
+  .landing{padding: var(--space-7)}
+  .hero__title{font-size:36px}
+  .hero__subtitle{font-size:20px}
+  .chip{min-height:auto; padding:12px 16px; font-size:16px}
+  .hero__footer{gap:var(--space-5)}
+  .badge{width:120px; height:120px}
+  .screens-card{height:auto; padding:16px}
+  .gallery{
+    display:flex; gap:var(--space-6); overflow-x:auto; scroll-snap-type: x mandatory; padding-bottom: var(--space-6);
+  }
+  .phone{min-width: 260px; scroll-snap-align: center;}
+}

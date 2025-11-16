@@ -1,0 +1,192 @@
+:root{
+  /* Colors from YAML/design (primary bg is #FFC83A) */
+  --bg-canvas:#FFC83A;
+  --text-primary:#1A1A1A;
+  --chip-gray:#F2F2F2;
+  --white:#FFFFFF;
+  --shadow-strong: rgba(0,0,0,.16);
+  --shadow-card: rgba(0,0,0,.10);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Canvas matches Figma frame ratio; we keep generous max width while preserving proportions */
+.canvas{
+  width: 100%;
+  max-width: 2340px;
+  margin: 0 auto;
+  min-height: 1560px;
+  display: grid;
+  grid-template-columns: 0.42fr 0.58fr; /* Approx left 982px / right 1358px */
+  gap: 48px;
+  padding: 64px 72px;
+  position: relative;
+}
+
+/* Left column (Hero) */
+.hero{position:relative}
+.hero__header{margin-bottom: 40px}
+.hero__title{
+  font-size: 64px;
+  line-height: 1.1;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+}
+.hero__subtitle{
+  font-size: 32px;
+  line-height: 1.25;
+  font-weight: 700;
+  margin: 0;
+}
+
+.feature-list{
+  list-style:none;
+  padding:0;
+  margin: 48px 0;
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+.feature-chip{
+  min-height:95px;
+  background: var(--chip-gray);
+  border-radius: 18px;
+  padding: 20px 24px;
+  font-size: 22px;
+  font-weight: 600;
+  display:flex;
+  align-items:center;
+  box-shadow: 0 10px 24px var(--shadow-card);
+}
+
+/* Figma badge + Screens card */
+.hero__footer{
+  display:flex; align-items:center; gap:24px;
+  margin-top: 24px;
+}
+.figma-badge{
+  width:182px; height:182px; border-radius:50%;
+  background: var(--white);
+  box-shadow: 0 12px 30px var(--shadow-card);
+  display:grid; place-items:center;
+}
+.figma-badge__icon{width:64%; height:auto; display:block}
+
+.screens-card{
+  width:467px; height:135px; background: var(--white);
+  border-radius: 18px;
+  box-shadow: 0 12px 32px var(--shadow-card);
+  display:flex; align-items:center; justify-content:flex-start;
+  padding: 0 24px;
+}
+.screens-card__label{
+  font-size: 24px; font-weight: 700;
+}
+
+/* Left floating collage (from YAML ids 33438:272..276) */
+.left-collage{position:absolute; inset:0; pointer-events:none}
+.collage{
+  position:absolute;
+  width: 388.52px;
+  height: 464.9px;
+  object-fit: cover;
+  border-radius: 24px;
+  box-shadow: 0 12px 32px var(--shadow-strong);
+}
+/* Map Figma approximate coordinates to hero-local area with transforms */
+.collage--a{ /* 33438:272 - x: -394.17, y: 179.57 */
+  left: 12%; top: 42%;
+  transform: translate(-50%,-50%) rotate(-6deg);
+}
+.collage--b{ /* 33438:273 - x: 0, y: -401 */
+  left: 28%; top: 8%;
+  transform: translate(-50%,-50%) rotate(4deg);
+}
+.collage--c{ /* 33438:274 - x: 130, y: 375 */
+  left: 36%; top: 58%;
+  transform: translate(-50%,-50%) rotate(-3deg);
+}
+.collage--d{ /* 33438:275 - x: 536, y: -180 */
+  left: 55%; top: 18%;
+  transform: translate(-50%,-50%) rotate(5deg);
+}
+.collage--e{ /* 33438:276 - x: 826, y: 285 */
+  left: 68%; top: 48%;
+  transform: translate(-50%,-50%) rotate(-2deg);
+}
+
+/* Right column gallery */
+.gallery{
+  position:relative;
+  min-height: 1000px;
+}
+.phone{
+  margin:0;
+  position:absolute;
+  filter: drop-shadow(0 12px 32px var(--shadow-strong));
+  transform-origin: center;
+}
+.phone img{
+  display:block;
+  width: 571px; /* close to provided 570.9px */
+  height: auto;
+  border-radius: 24px;
+  background: #fff;
+}
+
+/* Arrange per YAML relative diagonals (converted to relative positions in the gallery area)
+   Gallery is the right panel box; we position phones using percentages & pixel offsets to mimic Figma diagonals.
+*/
+.phone--orders{      /* /assets/figmaimages/figma_image_33438_323.png  x:-154 y:-986 (relative cluster left/top) */
+  left: 2%;
+  top: -60px;
+  transform: rotate(-6deg);
+}
+.phone--home{        /* /assets/figmaimages/figma_image_33438_324.png  x:381 y:-791 */
+  left: 28%;
+  top: 40px;
+  transform: rotate(5deg);
+}
+.phone--details{     /* /assets/figmaimages/figma_image_33438_325.png  x:-4 y:24 */
+  left: 16%;
+  top: 360px;
+  transform: rotate(-4deg);
+}
+.phone--cart{        /* /assets/figmaimages/figma_image_33438_300.png  x:531 y:208 */
+  left: 46%;
+  top: 520px;
+  transform: rotate(4deg);
+}
+.phone--track{       /* /assets/figmaimages/figma_image_33438_308.png  x:930 y:-521 */
+  left: 70%;
+  top: -40px;
+  transform: rotate(6deg);
+}
+.phone--categories{  /* /assets/figmaimages/figma_image_33438_311.png  x:-571 y:-376 (big rect variant nearby) */
+  left: 6%;
+  top: 620px;
+  transform: rotate(3deg);
+}
+
+/* Responsive fallbacks (stacked) */
+@media (max-width: 1440px){
+  .canvas{
+    grid-template-columns: 1fr;
+  }
+  .gallery{
+    position: relative;
+    min-height: auto;
+    padding-top: 24px;
+  }
+  .phone{position:relative; left:auto; top:auto; transform:none; margin: 24px auto}
+  .phone img{width: min(571px, 90vw)}
+  .left-collage{display:none}
+  .screens-card{width: 100%}
+}

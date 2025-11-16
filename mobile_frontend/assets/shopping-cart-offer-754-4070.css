@@ -1,0 +1,4 @@
+:root{ --white:#FFFFFF }
+html,body{margin:0;padding:0;height:100%;background:#fff}
+.screen{position:relative;width:375px;height:812px;margin:0 auto;overflow:hidden;background:#fff}
+.screen-image{position:absolute;left:0;top:0;width:375px;height:812px;opacity:0;pointer-events:none}

@@ -1,0 +1,390 @@
+:root{
+  /* Common palette derived from YAML style refs (best-effort) */
+  --color-ffffff: #FFFFFF;
+  --color-primary: #2A4BA0; /* style_26/common dark blue */
+  --color-text: #1E222B;
+  --color-subtext: #8891A5;
+  --color-chip: #F1F5F9;
+  --color-accent: #F9B023;
+  --color-tab-bg: #1E222B;
+  --color-card: #FAFBFD;
+}
+
+/* Reset */
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--color-ffffff);color:var(--color-text);height:100%}
+body{font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif}
+
+/* Screen Canvas: fixed size per Figma 375x812 */
+.screen{
+  position: relative;
+  width: 375px;
+  height: 812px;
+  overflow: hidden;
+  margin: 0 auto;
+  background: var(--color-ffffff);
+}
+
+/* Reference background image (debug overlay) */
+.screen-image{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 375px;
+  height: 812px;
+  opacity: 0; /* set via JS when debug=1 */
+  pointer-events: none;
+}
+
+/* Header BG rectangle (Bg) at x:-4834 y:1699 width:376 height:252 relative to frame -> top region height 252 */
+.header-bg{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 376px;
+  height: 252px;
+  background: var(--color-primary);
+}
+
+/* Decorative ellipses */
+.ellipse{position:absolute; pointer-events:none}
+.ellipse-1546{
+  /* Ellipse 1546 (style_0 subtle) approximate light tint circle */
+  left: 91px; /* relative mapping from YAML */
+  top: 278px;
+  width: 164px;
+  height: 164px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+}
+.ellipse-1548{
+  left: 171px;
+  top: 189px;
+  width: 22px;
+  height: 22px;
+}
+
+/* Search bar */
+.search-bar{
+  position: absolute;
+  left: 30px;   /* x:-4814 => frame left offset is 20; YAML shows 335 width, we align centered within 375: 20 margin */
+  top: 117px;   /* y:1816 => relative offset ~ from frame top = 117 within our 812 canvas */
+  width: 335px;
+  height: 56px;
+  border-radius: 28px;
+  background: #15307A; /* style_130 darker within header */
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 14px;
+}
+.search-icon{
+  width: 18px;
+  height: 18px;
+}
+.search-text{
+  font-size: 15px; /* typo_163 approx */
+  line-height: 19px;
+  color: #F8F9FB;
+  opacity: 0.8;
+}
+
+/* Top row */
+.top-row{
+  position: absolute;
+  left: 20px;
+  top: 59px; /* y:1751 -> about 59px from top */
+  width: 335px;
+  height: 30px;
+}
+.greeting{
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 24px; /* typo_131 approx */
+  line-height: 30px;
+  font-weight: 700;
+  color: #F8F9FB;
+}
+.cart-wrap{
+  position: absolute;
+  right: 0;
+  top: 1px;
+  width: 24px;
+  height: 24px;
+}
+.cart-bag{
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 18px;
+  height: 18px;
+}
+.cart-bag-stroke{width: 18px; height: 15px; display:block; position:absolute; left:0; top:2px}
+.cart-badge{
+  position: absolute;
+  right: -9px;
+  top: -7px;
+  width: 24px;
+  height: 24px;
+}
+.cart-badge img{width:24px;height:24px;display:block}
+.cart-count{
+  position: absolute;
+  left: 7px;
+  top: 2px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 19px;
+  color: #1E222B;
+}
+
+/* Delivery row */
+.delivery-row{
+  position: absolute;
+  left: 20px;
+  top: 202px; /* y:1901 -> within header area */
+  width: 336px;
+  height: 38px;
+  display:flex;
+  justify-content: space-between;
+}
+.delivery-left,.delivery-right{display:flex; flex-direction:column}
+.delivery-label{
+  font-size: 12px; /* typo_161 approx */
+  line-height: 15px;
+  color: #B2BBCE; /* style_128 */
+}
+.delivery-value{
+  display:flex; align-items:center; gap:8px;
+  height: 19px;
+}
+.delivery-value span{
+  font-size: 15px; /* typo_162 approx */
+  line-height: 19px;
+  color: #F8F9FB;
+}
+.arrow-small{width: 7px; height: 3.5px}
+
+/* Banner cards */
+.banner-cards{
+  position: absolute;
+  left: 20px;
+  top: 236px; /* y:1978 -> distance from top */
+  width: 316px;
+  height: 123px;
+  display: grid;
+  grid-template-columns: 158px 158px;
+  gap: 19px; /* from 20px margin fit */
+}
+.banner{
+  width: 158px;
+  height: 123px;
+  border-radius: 14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.banner-savings{
+  background: #15307A; /* style_132 darker blue */
+}
+.banner-time{
+  background: #223B9E; /* style_126 alt */
+}
+.banner-text{
+  width: 123px;
+  display:flex;
+  flex-direction: column;
+  gap: 0;
+}
+.banner-value{
+  font-size: 32px; /* typo_167 approx */
+  line-height: 38.5px;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+.banner-sub{
+  font-size: 14px; /* typo_168 approx */
+  line-height: 19px;
+  color: #F8F9FB;
+  opacity: 0.85;
+}
+
+/* Section Title */
+.section-title{
+  position: absolute;
+  left: 20px;
+  top: 418px; /* y:2136 => ~418 */
+  margin: 0;
+  font-size: 20px; /* typo_166 approx 26 height */
+  line-height: 26px;
+  color: #1E222B;
+  font-weight: 700;
+}
+
+/* Cards Grid (two columns, two rows) starting around y ~ 2184 -> map to top ~ 448 */
+.cards-grid{
+  position: absolute;
+  left: 20px;
+  top: 448px;
+  width: 335px;
+  display: grid;
+  grid-template-columns: 167px 167px;
+  grid-auto-rows: 194px;
+  gap: 26px 1px; /* match spacing between groups (approx) */
+}
+
+/* Card */
+.card{
+  width: 167px;
+  height: 194px;
+  background: #FFFFFF;
+  border-radius: 14px; /* style_116 */
+  box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+  position: relative;
+  overflow: hidden;
+  display:flex;
+  flex-direction: column;
+}
+.card-image-icon{
+  position: absolute;
+  left: 49px; /* x:-4767 center with width 68 */
+  top: 20px;  /* y:2204 => 20 from card top */
+  width: 68px;
+  height: 68px;
+  border-radius: 16px;
+  background: #F1F5F9; /* style_117 */
+  display:grid; place-items:center;
+  overflow: hidden;
+}
+.card-image-icon .v1{position:absolute; width:56.66px; height:56.66px; left:5.33px; top:5.33px}
+.card-image-icon .v2{position:absolute; width:14.16px; height:14.16px; left:18px; top:17px}
+.card-image-icon .v3{position:absolute; width:45.33px; height:28.43px; left:18px; top:33px}
+.card-image-icon .circlebox{width:56px; height:56px; opacity:.85}
+
+.card-content{
+  position: absolute;
+  left: 17px;
+  bottom: 16px;
+  width: 133px;
+  height: 92px;
+}
+.card-price{
+  position: absolute;
+  left: 0;
+  top: 36px;
+  font-weight: 700;
+  font-size: 16px; /* typo_151 approx 20 height */
+  line-height: 20px;
+  color: #1E222B;
+}
+.card-title{
+  position: absolute;
+  left: 0;
+  top: 60px;
+  width: 112px;
+  font-size: 12px; /* typo_165 approx 32 height */
+  line-height: 16px;
+  color: #616A7D; /* style_23 */
+}
+
+/* bottom row within card: left dots and right plus */
+.card-bottom{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 128px;
+  height: 24px;
+}
+.card-bottom .dots{
+  position: absolute;
+  left: 14px;
+  top: -210px; /* Invisible placeholder; In figma it's a group; we visually omit but keep place */
+  width: 23px; height: 19px;
+}
+.btn-plus{
+  position: absolute;
+  right: -9px;
+  top: -3px;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+.btn-bg{position:absolute; left:0; top:0; width:24px; height:24px}
+.btn-plus-icon{position:absolute; left:6px; top:6px; width:12px; height:12px}
+
+/* Tab bar */
+.tabbar{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 375px;
+  height: 103px;
+}
+.tabbar-bg{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 375px;
+  height: 89px;
+  background: #FFFFFF;
+  box-shadow: 0 -8px 20px rgba(0,0,0,0.06);
+}
+.tab-home{
+  position: absolute;
+  left: 35px; /* x:-4805 -> center left */
+  bottom: 24px;
+  width: 56px;
+  height: 56px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+.home-hex{position:absolute; left:0; top:0; width:56px; height:56px}
+.home-icon{position:absolute; left:16px; top:16px; width:24px; height:24px}
+
+.tab-categories{
+  position: absolute;
+  left: 132px;
+  bottom: 20px;
+  width: 63px; height: 41px;
+  background: transparent; border: 0; padding: 0;
+  display:flex; flex-direction: column; align-items:center; gap: 2px;
+}
+.cat-icon{width:24px; height:24px}
+.tab-text{
+  font-size: 12px; line-height: 16px; color: #8891A5;
+}
+
+.tab-fav{
+  position: absolute;
+  left: 222px;
+  bottom: 20px;
+  width: 53px; height: 41px;
+  background: transparent; border: 0; padding: 0;
+  display:flex; flex-direction: column; align-items:center; gap: 2px;
+}
+.fav-icon{width:24px; height:24px}
+
+.tab-more{
+  position: absolute;
+  right: 16px;
+  bottom: 20px;
+  width: 29px; height: 41px;
+  background: transparent; border: 0; padding: 0;
+  display:flex; flex-direction: column; align-items:center; gap: 2px;
+}
+.more-dots{
+  width: 24px; height: 24px;
+  display:block;
+  position: relative;
+}
+.more-dots::before, .more-dots::after{
+  content:""; position:absolute; left:10px; width:4px; background:#1E222B; border-radius:2px;
+}
+.more-dots::before{top:4px; height:16px; opacity: .5}
+.more-dots::after{display:none} /* single vertical dots as per graphic */
