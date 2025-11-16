@@ -1,16 +1,24 @@
-# mobile_frontend
+# Figma to Flutter Mobile Frontend
 
-A new Flutter project.
+This is a minimal Flutter scaffold to ensure the mobile container builds successfully and is ready for future Figma-to-Flutter screen integrations.
 
-## Getting Started
+## Structure
 
-This project is a starting point for a Flutter application.
+- `lib/main.dart` — Required Flutter entry point.
+- `lib/app.dart` — Root widget with `MaterialApp`, a basic `home` scaffold, and placeholder routes.
+- `pubspec.yaml` — Valid Flutter project configuration with Material icons enabled.
+- `analysis_options.yaml` — Static analysis configuration using `flutter_lints`.
 
-A few resources to get you started if this is your first Flutter project:
+## Run
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Ensure Flutter SDK is installed, then from the `mobile_frontend` directory:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+flutter pub get
+flutter run
+```
+
+## Extend
+
+- Add new screens under `lib/` and register routes in `FigmaToFlutterApp.routes`.
+- Keep code minimal and clean; no external services are integrated by default.
